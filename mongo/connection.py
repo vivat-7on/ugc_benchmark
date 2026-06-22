@@ -1,7 +1,12 @@
+from contextlib import contextmanager
+
 from pymongo import MongoClient
 
-# Создание клиента
-client = MongoClient('localhost', 27017)
 
-# Подключение к базе данных
-db = client['UsersDB']
+@contextmanager
+def get_mongo_db():
+    client = MongoClient("localhost", 27018)
+    try:
+        yield client["ugc"]
+    finally:
+        client.close()
