@@ -1,0 +1,25 @@
+services:
+
+  mongo_single:
+    container_name: mongo_single
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_single_data:/data/db
+
+  postgres:
+    image: postgres:16
+    container_name: test_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  mongo_single_data:
